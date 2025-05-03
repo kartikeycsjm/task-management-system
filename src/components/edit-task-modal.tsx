@@ -30,9 +30,10 @@ interface EditTaskModalProps {
   open: boolean
   onClose: () => void
   taskId: string
+  onTaskChange: () => void
 }
 
-export function EditTaskModal({ open, onClose, taskId }: EditTaskModalProps) {
+export function EditTaskModal({ open, onClose, taskId, onTaskChange }: EditTaskModalProps) {
   const router = useRouter()
   const [formData, setFormData] = useState<Task>({
     _id: "",
@@ -55,7 +56,7 @@ export function EditTaskModal({ open, onClose, taskId }: EditTaskModalProps) {
     try {
       await axios.put(`/api/edit-task/${taskId}`, formData)
       onClose()
-      router.refresh()
+      onTaskChange();
     } catch (error) {
       console.error("Error editing task:", error)
     }

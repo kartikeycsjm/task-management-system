@@ -21,10 +21,12 @@ type Task = {
     id: string
   }
 }
+import { useRouter } from "next/navigation"
 
-export function TaskList({ tasks }: { tasks: Task[] }) {
+export function TaskList({ tasks, onTaskChange }:
+  { tasks: Task[], onTaskChange: () => void }) {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
-  const [isDetailOpen, setIsDetailOpen] = useState(false)
+  const router = useRouter();
   const [isEditOpen, setIsEditOpen] = useState(false)
 
   const getPriorityBadge = (priority: string) => {
@@ -73,6 +75,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
       let x = confirm('Do you want to delete it?');
       if (x) {
         await axios.delete(`/api/edit-task/${taskId}`)
+        onTaskChange();
       }
       else {
         return
@@ -160,7 +163,7 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
 
       {selectedTask && (
         <>
-          <EditTaskModal taskId={selectedTask._id} open={isEditOpen} onClose={() => setIsEditOpen(false)} />
+          <EditTaskModal onTaskChange={onTaskChange} taskId={selectedTask._id} open={isEditOpen} onClose={() => setIsEditOpen(false)} />
         </>
       )}
     </div>

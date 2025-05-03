@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { Connect } from "@/DB/Coonnect";
 import Task from "@/DB/Schema/Task";
 import { NextRequest, NextResponse } from "next/server";
-
+import { Notification } from "@/DB/Schema/Notification";
 export const POST = async (req: NextRequest) => {
   try {
     await Connect();
@@ -27,6 +27,10 @@ export const POST = async (req: NextRequest) => {
         id: session?.user?.id,
         name: session?.user?.name
       }
+    });
+    await Notification.create({
+      userId: assignedTo.id,
+      message: `${session?.user?.name} assigned you a task: "${title}"`,
     });
 
     return NextResponse.json({ msg: 'Task created successfully', task: newTask }, { status: 201 });

@@ -12,9 +12,10 @@ interface User {
 interface CreateTaskModalProps {
     open: boolean
     onClose: () => void
+    onTaskChange: () => void
 }
 
-export function CreateTaskModal({ open, onClose }: CreateTaskModalProps) {
+export function CreateTaskModal({ open, onClose,onTaskChange }: CreateTaskModalProps) {
     const router = useRouter()
     const [formData, setFormData] = useState({
         title: "",
@@ -61,7 +62,8 @@ export function CreateTaskModal({ open, onClose }: CreateTaskModalProps) {
                     name: ""
                 }
             })
-            router.refresh()
+            onClose();
+            onTaskChange();
         } catch (error) {
             console.error("Error creating task:", error)
         }
