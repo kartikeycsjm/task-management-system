@@ -160,7 +160,6 @@ export function TaskList({ tasks }: { tasks: Task[] }) {
 
       {selectedTask && (
         <>
-          <TaskDetailModal task={selectedTask} open={isDetailOpen} onClose={() => setIsDetailOpen(false)} />
           <EditTaskModal taskId={selectedTask._id} open={isEditOpen} onClose={() => setIsEditOpen(false)} />
         </>
       )}
