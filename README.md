@@ -1,36 +1,107 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management System
 
-## Getting Started
+A full-featured task management system designed for small teams to create, assign, track, and manage tasks efficiently.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 📦 Features Implemented
+
+### ✅ User Authentication
+- Secure user registration and login.
+- Passwords hashed using industry standards.
+
+### ✅ Task Management
+- Create, read, update, delete tasks.
+- Each task includes: title, description, due date, priority, and status.
+
+### ✅ Team Collaboration
+- Assign tasks to registered users.
+- Real-time notification system for task assignments.
+
+### ✅ Dashboard
+- View tasks:
+  - Assigned to the logged-in user.
+  - Created by the logged-in user.
+  - That are overdue.
+
+### ✅ Search and Filter
+- Search by task title or description.
+- Filter by:
+  - Status (todo, in-progress, done)
+  - Priority (low, medium, high)
+  - Due Date (overdue, today, upcoming)
+  - Created by (me, others)
+
+---
+
+## 🛠️ Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/kartikeycsjm/task-management-system.git
+   cd task-management-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   Create a `.env.local` file with the following:
+   ```env
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
+
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Visit the app**  
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 💡 Approach Explanation
+
+- **Next.js App Router** used for modern routing and layout.
+- **Client Components** (`"use client"`) leveraged for interactivity and dynamic behavior.
+- **Axios** used for seamless API communication.
+- **Modular Component Design**: Components for Task List, Task Modal, Search, Filters, Notifications.
+- **Real-Time UX**: After any CRUD operation, the dashboard refreshes using state updates.
+- **Notifications**:
+  - Stored in database
+  - Fetched on dashboard load
+  - Displayed via popover UI
+
+---
+
+## ⚖️ Assumptions & Trade-Offs
+
+- **No real-time sockets**: Notifications are fetched on mount or manually refreshed, no WebSockets used.
+- **No pagination**: All tasks are fetched and filtered client-side.
+- **Simplified authentication**: Assumes basic JWT/session setup.
+- **Single-page refresh logic**: Uses client-side state management, not full page reloads.
+- **API with Next.js instead of Express/NestJS**: While Express or NestJS were suggested in the original requirements, I chose to use Next.js API routes. This decision was based on the advantages of tighter integration with the Next.js frontend, reduced boilerplate, and faster prototyping. The implementation remains modular and can be migrated to an Express/NestJS backend in the future with minimal effort.
+
+---
+
+## 📄 License
+This project is for educational/demo purposes and does not currently include a license.
+
+---
+
+## 🙋‍♂️ Author
+
+```
+Kartikey Mishra  
+B.Tech CSE Student | Web Developer  
+Email: kartikeymishracsjm@gmail.com  
+Portfolio: https://kartikeymishra.vercel.app  
+GitHub: https://github.com/kartikeycsjm  
+LinkedIn: https://linkedin.com/in/myselfkartikey
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
