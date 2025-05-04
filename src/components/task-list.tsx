@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { EditTaskModal } from "./edit-task-modal"
 import axios from "axios"
-
+import { TaskDetailModal } from "@/components/task-detail-modal"
 
 type Task = {
   _id: string
@@ -28,6 +28,7 @@ export function TaskList({ tasks, onTaskChange }:
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const router = useRouter();
   const [isEditOpen, setIsEditOpen] = useState(false)
+  const [isDetailOpen, setIsDetailOpen] = useState(false)
 
   const getPriorityBadge = (priority: string) => {
     switch (priority) {
@@ -69,7 +70,10 @@ export function TaskList({ tasks, onTaskChange }:
     const dueDate = new Date(dateString)
     return dueDate < today
   }
-
+  const handleViewDetails = (task: Task) => {
+    setSelectedTask(task)
+    setIsDetailOpen(true)
+  }
   const handleDelete = async (taskId: string) => {
     try {
       let x = confirm('Do you want to delete it?');
@@ -109,7 +113,7 @@ export function TaskList({ tasks, onTaskChange }:
                   {getStatusIndicator(task.status)}
                   <h3 className="text-lg font-medium text-gray-900 dark:text-white">{task.title}</h3>
                 </div>
-                <button
+                <button onClick={() => handleViewDetails(task)}
                   className="inline-flex h-8 w-8 items-center justify-center rounded-md text-gray-500 hover:bg-gray-100 hover:text-gray-600 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300"
                 >
                   •••
@@ -163,6 +167,7 @@ export function TaskList({ tasks, onTaskChange }:
 
       {selectedTask && (
         <>
+          <TaskDetailModal task={selectedTask} open={isDetailOpen} onClose={() => setIsDetailOpen(false)} />
           <EditTaskModal onTaskChange={onTaskChange} taskId={selectedTask._id} open={isEditOpen} onClose={() => setIsEditOpen(false)} />
         </>
       )}
