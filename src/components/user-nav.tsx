@@ -1,5 +1,6 @@
 "use client"
 import U from "./User"
+import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import { LogOut } from "./SignOut"
 export function UserNav() {
@@ -35,10 +36,10 @@ export function UserNav() {
         <div className="absolute right-0 z-10 mt-2 w-56 rounded-md border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800">
           {/* <U/> */}
           <div className="border-b border-gray-200 py-2 dark:border-gray-700">
-            <button className="flex w-full items-center px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+            <Link href={'/profile'} className="flex w-full items-center px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
               <span className="mr-2">👤</span>
               <span>Profile</span>
-            </button>
+            </Link>
           </div>
           <div className="py-2">
             <button onClick={LogOut}
