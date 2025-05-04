@@ -30,9 +30,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                         throw new CredentialsSignin('Please write correct password')
                     }
 
-                    // if (!user.verified) {
-                    //     throw new CredentialsSignin('Please verify your email first')
-                    // }
+                    if (!user.verified) {
+                        throw new CredentialsSignin('Please verify your email first')
+                    }
                     return user;
                 }
             })

@@ -1,5 +1,4 @@
-'use server'
-
+import { transporter } from "@/emailConfig";
 import { Connect } from "@/DB/Coonnect";
 import User from "@/DB/Schema/UserSchema";
 import bcrypt from 'bcryptjs';
@@ -23,7 +22,29 @@ export const POST = async (req: NextRequest) => {
       password: hashedPassword,
     });
 
-    return NextResponse.json({ msg: 'User registered successfully' }, { status: 201 });
+    try {
+      await transporter.sendMail({
+        from: 'kartikeymishracsjm@gmail.com',
+        to: email,
+        subject: 'Verify your email on Task-Management-System',
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+            <a href="https://taskpro1.vercel.app/verify/${newUser._id}">
+              Verify Your Email
+            </a>
+          </div>
+        `,
+        text: `You are welcome on Task-Management-System`,
+      });
+
+      return NextResponse.json({ msg: 'User registered successfully' }, { status: 201 });
+
+    } catch (emailErr) {
+      console.error("Email sending failed:", emailErr);
+      await User.findByIdAndDelete(newUser._id);
+      return NextResponse.json({ msg: 'Invalid email. User not registered.' }, { status: 400 });
+    }
+
   } catch (err) {
     console.error(err);
     return NextResponse.json({ msg: 'Internal server error' }, { status: 500 });

@@ -26,24 +26,32 @@ export default function RegisterPage() {
     e.preventDefault()
     setIsLoading(true)
     setError("")
-
+  
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match")
       setIsLoading(false)
       return
     }
-
+  
     try {
       const res = await axios.post('/api/register', formData);
       const m = res.data;
       console.log(m);
-      router.push("/login")
-    } catch (err) {
-      setError((err instanceof Error ? err.message : "An error occurred during registration"))
+  
+      // ✅ Show success message temporarily before redirecting
+      setError("User registered successfully. Redirecting to login...");
+      setTimeout(() => {
+        router.push("/login");
+      }, 1500); // 1.5s delay to let user read the message
+  
+    } catch (err: any) {
+      const msg = err.response?.data?.msg || "An error occurred during registration";
+      setError(msg); // ✅ Show specific message like "Invalid email"
     } finally {
       setIsLoading(false)
     }
   }
+  
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 dark:bg-gray-900">

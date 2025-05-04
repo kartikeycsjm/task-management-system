@@ -24,8 +24,12 @@ export default function LoginPage() {
     setError("")
 
     try {
-      await LogIn(formData.email,formData.password)
-      router.push("/")
+      await LogIn(formData.email, formData.password)
+      setError("Login successful. Redirecting...");
+      setTimeout(() => {
+        router.push("/")
+      }, 1500);
+
     } catch (err) {
       setError((err instanceof Error ? err.message : "An error occurred during login"))
     } finally {
@@ -67,7 +71,7 @@ export default function LoginPage() {
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Password
                 </label>
-                <Link href="/auth/forgot-password" className="text-xs text-blue-600 hover:underline dark:text-blue-400">
+                <Link href="/forgot-password" className="text-xs text-blue-600 hover:underline dark:text-blue-400">
                   Forgot password?
                 </Link>
               </div>
