@@ -30,7 +30,7 @@ export default function ResetPasswordPage() {
 
       const data = await res.data;
       if (res.status < 200 || res.status >= 300) throw new Error(data.msg || "Reset failed");
-      setSuccess("Password updated successfully. Redirecting to login...");
+      setSuccess(data.msg);
       setTimeout(() => router.push("/login"), 2000);
     } catch (err: any) {
       setError(err.message);

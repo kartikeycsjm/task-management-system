@@ -24,7 +24,10 @@ export default function LoginPage() {
     setError("")
 
     try {
-      await LogIn(formData.email, formData.password)
+      let x = await LogIn(formData.email, formData.password)
+      if (x.error.length > 0) {
+        throw new Error(x.error);
+      }
       setError("Login successful. Redirecting...");
       setTimeout(() => {
         router.push("/")

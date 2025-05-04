@@ -1,6 +1,6 @@
 # Task Management System
 
-A full-featured task management system designed for small teams to create, assign, track, and manage tasks efficiently.
+A full-featured task management system designed for small teams to create, assign, track, and manage tasks efficiently. It also includes secure features like **email verification**, **forgot password**, and **password reset** functionality.
 
 ---
 
@@ -9,6 +9,8 @@ A full-featured task management system designed for small teams to create, assig
 ### ✅ User Authentication
 - Secure user registration and login.
 - Passwords hashed using industry standards.
+- **Email verification** required before login.
+- **Forgot password** and **reset password** flows via secure email links.
 
 ### ✅ Task Management
 - Create, read, update, delete tasks.
@@ -34,6 +36,14 @@ A full-featured task management system designed for small teams to create, assig
 
 ---
 
+## 🔐 Account Security Features
+- Email verification link sent upon registration.
+- Forgot password flow sends a reset link via email.
+- Reset password using a time-limited token-based link.
+- All sensitive operations protected by secure tokens.
+
+---
+
 ## 🛠️ Setup Instructions
 
 1. **Clone the repository**
@@ -52,6 +62,9 @@ A full-featured task management system designed for small teams to create, assig
    ```env
    MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
+   EMAIL_USER=your_email@example.com
+   EMAIL_PASS=your_email_password
+   BASE_URL=http://localhost:3000
    ```
 
 4. **Run the development server**
@@ -82,13 +95,13 @@ A full-featured task management system designed for small teams to create, assig
 
 - **No real-time sockets**: Notifications are fetched on mount or manually refreshed, no WebSockets used.
 - **No pagination**: All tasks are fetched and filtered client-side.
-- **Simplified authentication**: Assumes basic JWT/session setup.
 - **Single-page refresh logic**: Uses client-side state management, not full page reloads.
 - **API with Next.js instead of Express/NestJS**: While Express or NestJS were suggested in the original requirements, I chose to use Next.js API routes. This decision was based on the advantages of tighter integration with the Next.js frontend, reduced boilerplate, and faster prototyping. The implementation remains modular and can be migrated to an Express/NestJS backend in the future with minimal effort.
 
 ---
 
 ## 📄 License
+
 This project is for educational/demo purposes and does not currently include a license.
 
 ---
@@ -103,5 +116,3 @@ Portfolio: https://kartikeymishra.vercel.app
 GitHub: https://github.com/kartikeycsjm  
 LinkedIn: https://linkedin.com/in/myselfkartikey
 ```
-
----

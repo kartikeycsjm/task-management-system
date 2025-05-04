@@ -11,7 +11,7 @@ const ProfilePage = async () => {
         name: session.user.name || "User",
         email: session.user.email || "user@example.com",
         id: session.user.id || '',
-        bio: "Passionate developer focused on creating efficient and user-friendly applications. Enjoys solving complex problems and collaborating with team members to deliver high-quality solutions.",
+        bio: 'A homo-sapien'
     }
 
     return (

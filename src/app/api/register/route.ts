@@ -37,7 +37,9 @@ export const POST = async (req: NextRequest) => {
         text: `You are welcome on Task-Management-System`,
       });
 
-      return NextResponse.json({ msg: 'User registered successfully' }, { status: 201 });
+      return NextResponse.json({
+        msg: 'User registered successfully. Please check your email for email verification'
+      }, { status: 201 });
 
     } catch (emailErr) {
       console.error("Email sending failed:", emailErr);
