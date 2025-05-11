@@ -36,7 +36,7 @@ export const POST = async (req: NextRequest) => {
       html: `
         <p>Hello ${user.fullName},</p>
         <p>You requested a password reset. Click the link below to reset it:</p>
-        <a href="https://taskpro1.vercel.app/reset-password/${resetToken}">Reset Password</a>
+        <a href="${process.env.LINK}/reset-password/${resetToken}">Reset Password</a>
         <p>This link will expire in 15 minutes.</p>
       `
     });

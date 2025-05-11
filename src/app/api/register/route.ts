@@ -29,7 +29,7 @@ export const POST = async (req: NextRequest) => {
         subject: 'Verify your email on Task-Management-System',
         html: `
           <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
-            <a href="https://taskpro1.vercel.app/verify/${newUser._id}">
+            <a href="${process.env.LINK}/verify/${newUser._id}">
               Verify Your Email
             </a>
           </div>
