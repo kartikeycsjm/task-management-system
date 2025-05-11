@@ -3,8 +3,6 @@ import React from 'react'
 import { auth } from '@/auth'
 const U = async () => {
     const session = await auth();
-    console.log(session);
-    
     return (
         <div className="border-b border-gray-200 p-4 dark:border-gray-700">
             <div className="flex flex-col space-y-1">
